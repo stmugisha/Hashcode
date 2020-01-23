@@ -1,2 +1,2 @@
 # Hashcode
-Solutions to Hashcode problems
+Solutions to Hashcode challenges.
