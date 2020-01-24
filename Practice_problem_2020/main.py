@@ -21,6 +21,7 @@ def orders(d: dict, N: int, M: int) -> list:
     to `M`.
     """
     current_sum = d[0]
+    #max_sum = 0
     pizza_list = []
     start = 0
 
@@ -30,7 +31,8 @@ def orders(d: dict, N: int, M: int) -> list:
             current_sum -= d[start]
             start += 1
         else:
-            pizza_list.append(i)   
+            pizza_list.append(i)
+    #print(f'Max_sum: {max_sum}')   
     return pizza_list
 
 def write(outputfile: str, typelist: list):
@@ -48,8 +50,15 @@ def write(outputfile: str, typelist: list):
 
 
 if __name__=='__main__':
-    M, N, S = read('./in/e_also_big.in')
-    print(f'M:{M}\nN:{N}\nS:{S}')
-    t_list = orders(S, N, M)
-    print(f'Orders: {t_list}')
-    write('./out/big.out', t_list)
+    inputfiles = ['a_example.in','b_small.in','c_medium.in',
+                  'd_quite_big.in','e_also_big.in']
+
+    outfiles = ['example.out', 'small.out', 'medium.out',
+                'q_big.out', 'big.out']
+
+    for f in range(4):
+        M, N, S = read('./in/'+ str(inputfiles[f]))
+        print(f'M:{M}\nN:{N}\nS:{S}')
+        t_list = orders(S, N, M)
+        print(f'Orders: {t_list}')
+        write('./out/'+str(outfiles[f]), t_list)
