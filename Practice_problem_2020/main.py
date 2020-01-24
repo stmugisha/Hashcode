@@ -50,6 +50,7 @@ def write(outputfile: str, typelist: list):
 
 
 if __name__=='__main__':
+    
     inputfiles = ['a_example.in','b_small.in','c_medium.in',
                   'd_quite_big.in','e_also_big.in']
 
