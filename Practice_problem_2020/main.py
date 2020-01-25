@@ -1,7 +1,10 @@
 # M: max. number of pizza slices
 # N: num of different pizza types
 # S: num of slices in each pizza type (S[n-1] <= M)
-import numpy as np
+
+#To-do:
+#remove duplicate values:i.e a pizza type can be ordered only once
+#maximize subarray element sum
 
 
 def read(filename: str) -> (int,int,list):
@@ -12,6 +15,7 @@ def read(filename: str) -> (int,int,list):
         S = S[0]
         t = [i for i in range(len(S))]
         S = dict(list(zip(t, S)))
+
     return (M, N, S)
 
 
@@ -25,7 +29,7 @@ def orders(d: dict, N: int, M: int) -> list:
     pizza_list = []
     start = 0
 
-    for i in d.keys():
+    for i in range(0, N-1):
         current_sum += d[i]
         if(current_sum > M):
             current_sum -= d[start]
