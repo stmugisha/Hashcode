@@ -17,7 +17,7 @@ def read(filename: str) -> (int,int,list):
         S = list(itertools.chain(*orders))
         t = [i for i in range(len(S))]
         S = dict(list(zip(t, S)))
-        
+
         #S = dict([next(j) for i, j in itertools.groupby(orders, lambda k: k[1])])
 
 
@@ -31,17 +31,16 @@ def order(d: dict, N: int, M: int) -> list:
     """
     current_sum = d[0]
     #max_sum = 0
-    pizza_list = []
+    pizza_list = list(d.keys())
     start = 0
 
-    for i in d.keys():
+    for i in range(1, N):
         current_sum += d[i]
-        if(current_sum > M):
+        while(current_sum > M):
             current_sum -= d[start]
+            pizza_list.remove(start)
             start += 1
-        else:
-            pizza_list.append(i)
-    #print(f'Max_sum: {max_sum}')   
+        
     return pizza_list
 
 def write(outputfile: str, typelist: list):
