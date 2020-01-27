@@ -3,23 +3,28 @@
 # S: num of slices in each pizza type (S[n-1] <= M)
 
 #To-do:
-#remove duplicate values:i.e a pizza type can be ordered only once
+
 #maximize subarray element sum
+
+import itertools
 
 
 def read(filename: str) -> (int,int,list):
     """Read an input file"""
     with open(filename, 'r') as file:
         M, N = map(int, file.readline().rstrip('\n').split())
-        S = [list(map(int, line.rstrip('\n').split())) for line in file]
-        S = S[0]
+        orders = [list(map(int, line.rstrip('\n').split())) for line in file]
+        S = list(itertools.chain(*orders))
         t = [i for i in range(len(S))]
         S = dict(list(zip(t, S)))
+        
+        #S = dict([next(j) for i, j in itertools.groupby(orders, lambda k: k[1])])
+
 
     return (M, N, S)
 
 
-def orders(d: dict, N: int, M: int) -> list:
+def order(d: dict, N: int, M: int) -> list:
     """Computes and return a slice(sub-array) of `d`
     whose elements have a combined sum less than or equal
     to `M`.
@@ -29,7 +34,7 @@ def orders(d: dict, N: int, M: int) -> list:
     pizza_list = []
     start = 0
 
-    for i in range(0, N-1):
+    for i in d.keys():
         current_sum += d[i]
         if(current_sum > M):
             current_sum -= d[start]
@@ -64,6 +69,6 @@ if __name__=='__main__':
     for f in range(4):
         M, N, S = read('./in/'+ str(inputfiles[f]))
         print(f'M:{M}\nN:{N}\nS:{S}')
-        t_list = orders(S, N, M)
+        t_list = order(S, N, M)
         print(f'Orders: {t_list}')
         write('./out/'+str(outfiles[f]), t_list)
